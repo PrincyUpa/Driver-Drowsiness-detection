@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    {% load static %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Drivelert</title>
+
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/animate.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}"/>
+
+    <script type="text/javascript" src="{% static '/js/jquery-1.11.2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZXJBVDf7R4JqmSpopVPoduIGWx1IwpBM"></script>
+    <script type="text/javascript" src="{% static '/js/plugins.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/contactsInfo.js' %}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body onload="show()">
+
+    <!-- MAIN CONTENT -->
+
+    <div class="container-fluid">
+
+        <!-- HEADER -->
+
+        <section id="header">
+
+            <!-- NAVIGATION -->
+            <nav class="navbar navbar-fixed-top navbar-default top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{% url 'index' %}">Drivelert</a>
+                    </div><!-- /.navbar-header -->
+
+                    <div class="collapse navbar-collapse" id="menu">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#add">Add Contact</a></li>
+                            <li><a href="#search">Search Contact</a></li>
+                            <li><a href="#delete">Delete Contact</a></li>
+                            <li><a href="#show">My Contacts</a></li>
+                        </ul>
+                    </div> <!-- /.navbar-collapse -->
+                </div> <!-- /.container -->
+            </nav>
+        </section>
+
+        <br><br><br>
+
+        <!-- ADD CONTACT -->
+
+        <section id="add" class="light">
+            <form id="addC">
+                <header class="title">
+                    <h2>Add <span>Contact</span></h2><br>
+                    <label for="nameA">
+                        <p>Name </p>
+                    </label><br>
+                    <input type="text" class="button" id="nameA" name="nameA" style="color:white;"
+                        pattern="[A-Za-z0-9-_]">
+                    <br><br>
+                    <label for="mobileA">
+                        <p>Mobile No. </p>
+                    </label><br>
+                    <input type="tel" class="button" id="mobileA" name="mobileA" style="color:white;"
+                        pattern="[789][0-9]{9}"><br>
+                </header>
+                <div class="wrapper">
+                    <input id="addContact" class="button" type="submit" name="addContact" onclick="submitA()">
+                </div>
+            </form>
+            <!-- Function to reset form -->
+            <script>
+                function submitA() {
+                    add(document.getElementById("nameA").value, document.getElementById("mobileA").value);
+                    document.getElementById("addC").reset();
+                }
+            </script>
+        </section>
+
+        <!-- SEARCH CONTACT -->
+
+        <section id="search" class="light">
+            <form id="searchC">
+                <header class="title">
+                    <h2>Search <span>Contact</span></h2><br>
+                    <label for="nameS">
+                        <p>Search by Name </p>
+                    </label><br>
+                    <input type="text" class="button" id="nameS" name="nameS" style="color:white;">
+                    <br><br>
+                    <h2><span>OR</span></h2>
+                    <br><br>
+                    <label for="mobileS">
+                        <p>Search by Mobile No. </p>
+                    </label><br>
+                    <input type="tel" class="button" id="mobileS" name="mobileS" style="color:white;"
+                        pattern="[789][0-9]{9}"><br>
+                </header>
+                <div class="wrapper">
+                    <button id="searchContact" class="button" type="submit" name="searchContact"
+                        onclick="submitS()">Search Contact</button>
+                </div>
+            </form>
+            <!-- Function to reset form -->
+            <script>
+                function submitS() {
+                    search(document.getElementById("nameS").value, document.getElementById("mobileS").value);
+                    document.getElementById("searchC").reset();
+                }
+            </script>
+            <div class="wrapper" id="searchPrint"></div>
+        </section>
+
+        <!-- DELETE CONTACT -->
+
+        <section id="delete" class="light">
+            <form id="deleteC">
+                <header class="title">
+                    <h2>Delete <span>Contact</span></h2><br>
+                    <label for="nameD">
+                        <p>Name </p>
+                    </label><br>
+                    <input type="text" class="button" id="nameD" name="nameD" style="color:white;"
+                        pattern="[A-Za-z0-9-_]">
+                    <br><br>
+                    <h2><span>OR</span></h2>
+                    <br><br>
+                    <label for="mobileD">
+                        <p>Mobile No. </p>
+                    </label><br>
+                    <input type="tel" class="button" id="mobileD" name="mobileD" style="color:white;"
+                        pattern="[789][0-9]{9}"><br>
+                </header>
+                <div class="wrapper">
+                    <button id="deleteContact" class="button" type="submit" name="deleteContact"
+                        onclick="submitD()">Delete Contact</button>
+                </div>
+            </form>
+            <!-- Function to reset form -->
+            <script>
+                function submitD() {
+                    del(document.getElementById("nameD").value, document.getElementById("mobileD").value);
+                    document.getElementById("deleteC").reset();
+                }
+            </script>
+        </section>
+
+        <!-- MY CONTACTS -->
+
+        <section id="show" class="light">
+            <header class="title">
+                <h2>My <span>Contacts</span></h2>
+            </header>
+            <div class="wrapper" id="showPrint"></div>
+        </section>
+
+    </div><!-- /.container-fluid -->
+
+</body>
+
+</html>

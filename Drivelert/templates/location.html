@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    {% load static %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Drivelert</title>
+
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/animate.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}"/>
+
+    <script type="text/javascript" src="{% static '/js/jquery-1.11.2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZXJBVDf7R4JqmSpopVPoduIGWx1IwpBM"></script>
+    <script type="text/javascript" src="{% static '/js/plugins.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/contactsInfo.js' %}"></script>
+
+</head>
+
+<body>
+
+<!-- MAIN CONTENT -->
+
+<div class="container-fluid">
+
+    <!-- HEADER -->
+
+    <section id="header">
+
+        <!-- NAVIGATION -->
+        <nav class="navbar navbar-fixed-top navbar-default top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'index' %}">Drivelert</a>
+                </div><!-- /.navbar-header -->
+            </div> <!-- /.container -->
+        </nav>
+    </section>
+
+    <br><br><br><br><br>
+
+    <!-- SHARE LOCATION -->
+    <section id="shareLocation" class="light">
+        <header class="title">
+            <h2>Click the button to share your <span>Location</span></h2>
+        </header>
+        <div class="wrapper">
+            <button id="Location" class="button" type="button" name="Location" onclick="shareLocation()">Share
+                Location
+            </button>
+        </div>
+    </section>
+
+    <!-- SHOW LOCATION -->
+    <div  id="showLocation" class="wrapper"></div>
+
+    <!-- SCRIPT -->
+    <script>
+        var x = document.getElementById("demo");
+
+        function shareLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            document.getElementById("showLocation").innerHTML = "<h3>Your location has been shared with your Emergency Contacts!!!</h3>";
+        }
+    </script>
+</div>
+</body>
+
+</html>

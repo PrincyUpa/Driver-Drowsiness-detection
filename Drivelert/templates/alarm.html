@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    {% load static %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Drivelert</title>
+
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/animate.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}"/>
+
+    <script type="text/javascript" src="{% static '/js/jquery-1.11.2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZXJBVDf7R4JqmSpopVPoduIGWx1IwpBM"></script>
+    <script type="text/javascript" src="{% static '/js/plugins.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/contactsInfo.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/main.js' %}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<!-- MAIN CONTENT -->
+
+<div class="container-fluid">
+
+    <!-- HEADER -->
+
+    <section id="header">
+
+        <!-- NAVIGATION -->
+        <nav class="navbar navbar-fixed-top navbar-default top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'index' %}">Drivelert</a>
+                </div><!-- /.navbar-header -->
+            </div> <!-- /.container -->
+        </nav>
+    </section>
+
+    <br><br><br>
+
+    <section id="add" class="light">
+
+        <header class="title">
+            <h2>Set <span>Alarm Tone</span></h2><br>
+
+            <div class="wrapper">
+                <div class="radio-toolbar">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>
+                                <input type="radio" id="radioTone1" name="radioTone" value="tone1" checked>
+                                <label class="button" for="radioTone1" style="width:300px;">Rudolph-the-red-nosed music</label>
+                            </td>
+                            <td>
+                                <audio controls>
+                                    <source src="{% static '/mp3/Rudolph-the-red-nosedmusic.mp3' %}" type="audio/mp3">
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" id="radioTone2" name="radioTone" value="tone2">
+                                <label class="button" for="radioTone2" style="width:300px;">Daybreak</label>
+                            </td>
+                            <td>
+                                <audio controls>
+                                    <source src="{% static '/mp3/Daybreak.mp3' %}" type="audio/mp3">
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" id="radioTone3" name="radioTone" value="tone3">
+                                <label class="button" for="radioTone3" style="width:300px;">EarlyRiser</label>
+                            </td>
+                            <td>
+                                <audio controls>
+                                    <source src="{% static '/mp3/EarlyRiser.mp3' %}" type="audio/mp3">
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input type="radio" id="radioTone4" name="radioTone" value="tone4">
+                                <label class="button" for="radioTone4" style="width:300px;">Freshstart</label>
+                            </td>
+                            <td>
+                                <audio controls>
+                                    <source src="{% static '/mp3/Freshstart.mp3' %}" type="audio/mp3">
+                                </audio>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input type="radio" id="radioTone5" name="radioTone" value="tone5">
+                                <label class="button" for="radioTone5" style="width:300px;">SlowMorning</label>
+                            </td>
+                            <td>
+                                <audio controls>
+                                    <source src="{% static '/mp3/SlowMorning.mp3' %}" type="audio/mp3">
+                                </audio>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </header>
+        <div class="wrapper">
+            <button id="setTone" class="button" name="setTone" onclick="setTone()">Set Tone</button>
+        </div>
+
+        <!-- Function to set alarm tone -->
+        <script>
+                function setTone() {
+                    let ele = document.getElementsByName('radioTone');
+                    for (let i = 0; i < ele.length; i++) {
+                        if (ele[i].checked) {
+                            //send ele[i].value to python alarm code
+                        }
+                    }
+                }
+
+        </script>
+    </section>
+</div>
+
+</body>
+
+</html>
